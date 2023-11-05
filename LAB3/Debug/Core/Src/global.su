@@ -1,0 +1,2 @@
+global.c:29:6:display7SEG	32	static
+global.c:63:6:write_led	16	static
