@@ -13,10 +13,13 @@ void fsm_for_normal (){
 				write_led(R1_RED_Pin, R2_RED_Pin, 1);			//RED LEDs OFF
 				write_led(R1_YELLOW_Pin, R2_YELLOW_Pin, 1);		//YELLOW LEDs OFF
 				write_led(R1_GREEN_Pin, R2_GREEN_Pin, 1);		//GREEN LEDs OFF
+				write_led(SEG1_Pin, SEG2_Pin, 1);				//4 7SEG OFF
+				write_led(SEG3_Pin, SEG4_Pin, 1);
 
 				status = RED_GREEN;
 				setTimer(100, 0);								//Timer for every second
 				setTimer(led_duration[GREEN_DURA] * 100, 1);	//Timer for led duration
+				setTimer(25, 2);								//Timer for scan 7SEG
 				break;
 			case RED_GREEN:
 				if(timer_flag[1]){
@@ -34,15 +37,18 @@ void fsm_for_normal (){
 				else{
 					write_led(R1_RED_Pin, R2_GREEN_Pin, 0);		//ROAD1: RED ON, ROAD2: GREEN ON
 
-					display7SEG(led_count1, GPIOA, 0);			//Display led count
-					display7SEG(led_count1, GPIOA, 1);
-					display7SEG(led_count2, GPIOB, 0);
+					if(timer_flag[2]) {
+						scan7SEG(mode, segth++);									//display 4 7SEG count
+						segth %= 4;
+						setTimer(25, 2);
+					}
 				}
 
 
 				if(is_Pressed(BUTTON1)){						//If BUTTON1 is pressed, change to MODIFY_RED state
 					status = MODIFY_RED;						//and set timer for every 0.5 sec
 					write_led(R1_RED_Pin, R2_GREEN_Pin, 1);
+					mode = 1;
 					setTimer(50, 0);
 				}
 				break;
@@ -62,14 +68,17 @@ void fsm_for_normal (){
 				else{
 					write_led(R1_RED_Pin, R2_YELLOW_Pin, 0);
 
-					display7SEG(led_count1, GPIOA, 0);
-					display7SEG(led_count1, GPIOA, 1);
-					display7SEG(led_count2, GPIOB, 0);
+					if(timer_flag[2]) {
+						scan7SEG(mode, segth++);									//display 4 7SEG count
+						segth %= 4;
+						setTimer(25, 2);
+					}
 				}
 
 				if(is_Pressed(BUTTON1)){
 					status = MODIFY_RED;
 					write_led(R1_RED_Pin, R2_YELLOW_Pin, 1);
+					mode = 1;
 					setTimer(50, 0);
 				}
 				break;
@@ -88,14 +97,17 @@ void fsm_for_normal (){
 				else{
 					write_led(R1_GREEN_Pin, R2_RED_Pin, 0);
 
-					display7SEG(led_count1, GPIOA, 0);
-					display7SEG(led_count1, GPIOA, 1);
-					display7SEG(led_count2, GPIOB, 0);
+					if(timer_flag[2]) {
+						scan7SEG(mode, segth++);									//display 4 7SEG count
+						segth %= 4;
+						setTimer(25, 2);
+					}
 				}
 
 				if(is_Pressed(BUTTON1)){
 					status = MODIFY_RED;
 					write_led(R1_GREEN_Pin, R2_RED_Pin, 1);
+					mode = 1;
 					setTimer(50, 0);
 				}
 				break;
@@ -115,20 +127,23 @@ void fsm_for_normal (){
 				else{
 					write_led(R1_YELLOW_Pin, R2_RED_Pin, 0);
 
-					display7SEG(led_count1, GPIOA, 0);
-					display7SEG(led_count1, GPIOA, 1);
-					display7SEG(led_count2, GPIOB, 0);
+					if(timer_flag[2]) {
+						scan7SEG(mode, segth++);									//display 4 7SEG count
+						segth %= 4;
+						setTimer(25, 2);
+					}
 				}
 
 				if(is_Pressed(BUTTON1)){
 					status = MODIFY_RED;
 					write_led(R1_YELLOW_Pin, R2_RED_Pin, 1);
+					mode = 1;
 					setTimer(50, 0);
 				}
 				break;
 		}
 
-		if(timer_flag[0]){						//Every second, decrease led count
+		if(timer_flag[0] && mode == 0){						//Every second, decrease led count
 			if(led_count1 > 0) --led_count1;
 			if(led_count2 > 0) --led_count2;
 			setTimer(100, 0);
@@ -138,9 +153,11 @@ void fsm_for_normal (){
 void fsm_for_modify(){
 	switch(status){
 			case MODIFY_RED:
-				display7SEG(modify_val % 10, GPIOA, 0);					//Display modified value and number of MODE
-				display7SEG(modify_val / 10, GPIOA, 1);
-				display7SEG(MODIFY_RED - 10, GPIOB, 0);
+				if(timer_flag[2]) {
+					scan7SEG(mode, segth++);					//Display modified value and number of MODE
+					segth %= 4;
+					setTimer(25, 2);
+				}
 
 				if(timer_flag[0]){
 					HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin | R2_RED_Pin);	//Red Leds blink every 0.5 sec
@@ -158,9 +175,11 @@ void fsm_for_modify(){
 				}
 				break;
 			case MODIFY_YELLOW:
-				display7SEG(modify_val % 10, GPIOA, 0);
-				display7SEG(modify_val / 10, GPIOA, 1);
-				display7SEG(MODIFY_YELLOW - 10, GPIOB, 0);
+				if(timer_flag[2]) {
+					scan7SEG(mode, segth++);					//Display modified value and number of MODE
+					segth %= 4;
+					setTimer(25, 2);
+				}
 
 				if(timer_flag[0]){
 					HAL_GPIO_TogglePin(GPIOB, R1_YELLOW_Pin | R2_YELLOW_Pin);
@@ -178,9 +197,11 @@ void fsm_for_modify(){
 				}
 				break;
 			case MODIFY_GREEN:
-				display7SEG(modify_val % 10, GPIOA, 0);
-				display7SEG(modify_val / 10, GPIOA, 1);
-				display7SEG(MODIFY_GREEN - 10, GPIOB, 0);
+				if(timer_flag[2]) {
+					scan7SEG(mode, segth++);					//Display modified value and number of MODE
+					segth %= 4;
+					setTimer(25, 2);
+				}
 
 				if(timer_flag[0]){
 					HAL_GPIO_TogglePin(GPIOB, R1_GREEN_Pin | R2_GREEN_Pin);
@@ -190,6 +211,7 @@ void fsm_for_modify(){
 				if(is_Pressed(BUTTON1)){
 					status = RED_GREEN;
 					write_led(R1_GREEN_Pin, R2_GREEN_Pin, 1);
+					mode = 0;
 
 					led_count1 = led_duration[RED_DURA];
 					led_count2 = led_duration[GREEN_DURA];
@@ -203,7 +225,7 @@ void fsm_for_modify(){
 				}
 				break;
 		}
-	if(is_Pressed(BUTTON2)){					//If BUTTON2 is pressed, increase modify_val by 1
+	if(is_Pressed(BUTTON2) && mode){					//If BUTTON2 is pressed, increase modify_val by 1
 		++modify_val;
 		if(modify_val == 100) modify_val = 1;
 	}

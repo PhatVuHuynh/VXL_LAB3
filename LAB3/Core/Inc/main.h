@@ -58,38 +58,20 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define R1_A1_Pin GPIO_PIN_0
-#define R1_A1_GPIO_Port GPIOA
-#define R1_B1_Pin GPIO_PIN_1
-#define R1_B1_GPIO_Port GPIOA
-#define R1_C1_Pin GPIO_PIN_2
-#define R1_C1_GPIO_Port GPIOA
-#define R1_D1_Pin GPIO_PIN_3
-#define R1_D1_GPIO_Port GPIOA
-#define R1_E1_Pin GPIO_PIN_4
-#define R1_E1_GPIO_Port GPIOA
-#define R1_F1_Pin GPIO_PIN_5
-#define R1_F1_GPIO_Port GPIOA
-#define R1_G1_Pin GPIO_PIN_6
-#define R1_G1_GPIO_Port GPIOA
+#define SEG1_Pin GPIO_PIN_3
+#define SEG1_GPIO_Port GPIOA
+#define SEG2_Pin GPIO_PIN_4
+#define SEG2_GPIO_Port GPIOA
+#define SEG3_Pin GPIO_PIN_5
+#define SEG3_GPIO_Port GPIOA
+#define SEG4_Pin GPIO_PIN_6
+#define SEG4_GPIO_Port GPIOA
 #define BUTTON1_Pin GPIO_PIN_0
 #define BUTTON1_GPIO_Port GPIOB
 #define BUTTON2_Pin GPIO_PIN_1
 #define BUTTON2_GPIO_Port GPIOB
 #define BUTTON3_Pin GPIO_PIN_2
 #define BUTTON3_GPIO_Port GPIOB
-#define R2_B_Pin GPIO_PIN_10
-#define R2_B_GPIO_Port GPIOB
-#define R2_C_Pin GPIO_PIN_11
-#define R2_C_GPIO_Port GPIOB
-#define R2_D_Pin GPIO_PIN_12
-#define R2_D_GPIO_Port GPIOB
-#define R2_E_Pin GPIO_PIN_13
-#define R2_E_GPIO_Port GPIOB
-#define R2_F_Pin GPIO_PIN_14
-#define R2_F_GPIO_Port GPIOB
-#define R2_G_Pin GPIO_PIN_15
-#define R2_G_GPIO_Port GPIOB
 #define R1_A_Pin GPIO_PIN_9
 #define R1_A_GPIO_Port GPIOA
 #define R1_B_Pin GPIO_PIN_10
@@ -116,8 +98,6 @@ void Error_Handler(void);
 #define R2_YELLOW_GPIO_Port GPIOB
 #define R2_GREEN_Pin GPIO_PIN_8
 #define R2_GREEN_GPIO_Port GPIOB
-#define R2_A_Pin GPIO_PIN_9
-#define R2_A_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

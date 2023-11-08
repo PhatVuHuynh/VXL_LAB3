@@ -38,10 +38,14 @@ extern uint16_t modify_val;
 extern uint8_t led_count1;
 extern uint8_t led_count2;
 
+extern uint8_t mode;
+extern uint8_t segth;
+
 extern uint8_t led_duration[3];
 extern uint8_t segments[10];
 
-void display7SEG(int num, GPIO_TypeDef* gpio, int special);
+void display7SEG(uint8_t num);
+void scan7SEG(uint8_t mode, uint8_t i);
 void write_led(uint16_t R1_LED, uint16_t R2_LED, int state);
 
 #endif /* INC_GLOBAL_H_ */
