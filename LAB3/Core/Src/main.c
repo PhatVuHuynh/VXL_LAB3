@@ -198,6 +198,9 @@ status = INIT;
 //int c = 0;
   while (1){
 
+	  fsm_for_normal();
+	  fsm_for_modify();
+
 //	  HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 0);
 //	  if(timer_flag[2]) {
 //		  HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin);
@@ -224,8 +227,7 @@ status = INIT;
 //	  HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin);
 //	  HAL_Delay(250);
 //	  if(timer_flag[0]){
-	  fsm_for_normal();
-	  fsm_for_modify();
+
 //	  write_led(R1_RED_Pin, R2_GREEN_Pin, 0);
 
 //	display7SEG(led_count[R1], GPIOA);
