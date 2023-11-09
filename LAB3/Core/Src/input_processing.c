@@ -19,19 +19,21 @@ void fsm_for_normal (){
 				status = RED_GREEN;
 				setTimer(100, 0);								//Timer for every second
 				setTimer(led_duration[GREEN_DURA] * 100, 1);	//Timer for led duration
-				setTimer(25, 2);								//Timer for scan 7SEG
+				setTimer(24, 2);								//Timer for scan 7SEG
 				break;
 			case RED_GREEN:
 				if(timer_flag[1]){
-					if(led_count1 < led_count2){				//If red = 0 and green > 0, wait till green = 0
-						setTimer(led_count2 * 100, 1);			//else change to state RED_YELLOW
-					}
-					else{
+//					if(led_count1 < led_count2){				//If red = 0 and green > 0, wait till green = 0
+//						setTimer(led_count2 * 100, 1);			//else change to state RED_YELLOW
+//					}
+//					else{
+						++led_count1;
+						++led_count2;
 						led_count2 = led_duration[YELLOW_DURA];
 						status = RED_YELLOW;
 						write_led(R1_RED_Pin, R2_GREEN_Pin, 1);
 						setTimer(led_duration[YELLOW_DURA] * 100, 1);
-					}
+					//}
 
 				}
 				else{
@@ -40,7 +42,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(25, 2);
+						setTimer(24, 2);
 					}
 				}
 
@@ -54,16 +56,18 @@ void fsm_for_normal (){
 				break;
 			case RED_YELLOW:
 				if(timer_flag[1]){
-					if(led_count1 < led_count2){
-						setTimer(led_count2 * 100, 1);
-					}
-					else{
+//					if(led_count1 < led_count2){
+//						setTimer(led_count2 * 100, 1);
+//					}
+//					else{
+						++led_count1;
+						++led_count2;
 						led_count1 = led_duration[GREEN_DURA];
 						led_count2 = led_duration[RED_DURA];
 						status = GREEN_RED;
 						write_led(R1_RED_Pin, R2_YELLOW_Pin, 1);
 						setTimer(led_duration[GREEN_DURA] * 100, 1);
-					}
+					//}
 				}
 				else{
 					write_led(R1_RED_Pin, R2_YELLOW_Pin, 0);
@@ -71,7 +75,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(25, 2);
+						setTimer(24, 2);
 					}
 				}
 
@@ -84,15 +88,17 @@ void fsm_for_normal (){
 				break;
 			case GREEN_RED:
 				if(timer_flag[1]){
-					if(led_count2 < led_count1){
-						setTimer(led_count1 * 100, 1);
-					}
-					else{
+//					if(led_count2 < led_count1){
+//						setTimer(led_count1 * 100, 1);
+//					}
+//					else{
+						++led_count1;
+						++led_count2;
 						led_count1 = led_duration[YELLOW_DURA];
 						status = YELLOW_RED;
 						write_led(R1_GREEN_Pin, R2_RED_Pin, 1);
 						setTimer(led_duration[YELLOW_DURA] * 100, 1);
-					}
+					//}
 				}
 				else{
 					write_led(R1_GREEN_Pin, R2_RED_Pin, 0);
@@ -100,7 +106,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(25, 2);
+						setTimer(24, 2);
 					}
 				}
 
@@ -113,16 +119,18 @@ void fsm_for_normal (){
 				break;
 			case YELLOW_RED:
 				if(timer_flag[1]){
-					if(led_count2 < led_count1){
-						setTimer(led_count1 * 100, 1);
-					}
-					else{
+//					if(led_count2 < led_count1){
+//						setTimer(led_count1 * 100, 1);
+//					}
+//					else{
+						++led_count1;
+						++led_count2;
 						led_count1 = led_duration[RED_DURA];
 						led_count2 = led_duration[GREEN_DURA];
 						status = RED_GREEN;
 						write_led(R1_YELLOW_Pin, R2_RED_Pin, 1);
 						setTimer(led_duration[GREEN_DURA] * 100, 1);
-					}
+					//}
 				}
 				else{
 					write_led(R1_YELLOW_Pin, R2_RED_Pin, 0);
@@ -130,7 +138,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(25, 2);
+						setTimer(24, 2);
 					}
 				}
 
@@ -155,8 +163,8 @@ void fsm_for_modify(){
 			case MODIFY_RED:
 				if(timer_flag[2]) {
 					scan7SEG(mode, segth++);					//Display modified value and number of MODE
-					segth %= 4;
-					setTimer(25, 2);
+					segth %= 3;
+					setTimer(24, 2);
 				}
 
 				if(timer_flag[0]){
@@ -177,8 +185,8 @@ void fsm_for_modify(){
 			case MODIFY_YELLOW:
 				if(timer_flag[2]) {
 					scan7SEG(mode, segth++);					//Display modified value and number of MODE
-					segth %= 4;
-					setTimer(25, 2);
+					segth %= 3;
+					setTimer(24, 2);
 				}
 
 				if(timer_flag[0]){
@@ -199,8 +207,8 @@ void fsm_for_modify(){
 			case MODIFY_GREEN:
 				if(timer_flag[2]) {
 					scan7SEG(mode, segth++);					//Display modified value and number of MODE
-					segth %= 4;
-					setTimer(25, 2);
+					segth %= 3;
+					setTimer(24, 2);
 				}
 
 				if(timer_flag[0]){
@@ -213,8 +221,19 @@ void fsm_for_modify(){
 					write_led(R1_GREEN_Pin, R2_GREEN_Pin, 1);
 					mode = 0;
 
+					if(led_duration[RED_DURA] != led_duration[GREEN_DURA] + led_duration[YELLOW_DURA]){
+						led_duration[RED_DURA] = INIT_RED_DURA;			//if red_duration != yellow_duration + green_duration
+						led_duration[YELLOW_DURA] = INIT_YELLOW_DURA;	//set all led duration to init_duration
+						led_duration[GREEN_DURA] = INIT_GREEN_DURA;		//and change to state INIT
+						status = ERR;
+						mode = 1;
+					}
+
+					++led_count1;
+					++led_count2;
 					led_count1 = led_duration[RED_DURA];
 					led_count2 = led_duration[GREEN_DURA];
+
 					setTimer(led_duration[GREEN_DURA] * 100, 1);
 					setTimer(100, 0);
 					break;
@@ -224,8 +243,21 @@ void fsm_for_modify(){
 					led_duration[GREEN_DURA] = modify_val;
 				}
 				break;
+			case ERR:							//ERR state
+				if(timer_flag[2]) {
+					scan7SEG(mode, 10);		//Display letter 'E'
+					setTimer(24, 2);
+				}
+
+				if(timer_flag[0]) {
+					status = INIT;
+					mode = 0;
+					setTimer(led_duration[GREEN_DURA] * 100, 1);
+					setTimer(100, 0);
+				}
+				break;
 		}
-	if(is_Pressed(BUTTON2) && mode){					//If BUTTON2 is pressed, increase modify_val by 1
+	if(is_Pressed(BUTTON2) && mode == 1){					//If BUTTON2 is pressed, increase modify_val by 1
 		++modify_val;
 		if(modify_val == 100) modify_val = 1;
 	}

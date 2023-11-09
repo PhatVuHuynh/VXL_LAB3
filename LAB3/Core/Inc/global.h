@@ -12,6 +12,8 @@
 #include "button.h"
 #include "main.h"
 
+#define ERR		999
+
 #define INIT 	0
 #define RED_GREEN	1
 #define RED_YELLOW	2
@@ -33,6 +35,10 @@
 #define YELLOW_DURA	1
 #define GREEN_DURA	2
 
+#define INIT_RED_DURA	5
+#define INIT_YELLOW_DURA	2
+#define INIT_GREEN_DURA	3
+
 extern uint16_t status;
 extern uint16_t modify_val;
 extern uint8_t led_count1;
@@ -42,7 +48,7 @@ extern uint8_t mode;
 extern uint8_t segth;
 
 extern uint8_t led_duration[3];
-extern uint8_t segments[10];
+extern uint8_t segments[11];
 
 void display7SEG(uint8_t num);
 void scan7SEG(uint8_t mode, uint8_t i);

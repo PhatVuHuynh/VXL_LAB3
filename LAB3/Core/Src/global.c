@@ -10,7 +10,7 @@
 
 uint16_t modify_val = 1;
 uint16_t status = INIT;
-uint8_t led_duration[3] = {5, 2, 3};
+uint8_t led_duration[3] = {INIT_RED_DURA, INIT_YELLOW_DURA, INIT_GREEN_DURA};
 
 uint8_t led_count1 = 5;
 uint8_t led_count2 = 3;
@@ -18,7 +18,7 @@ uint8_t led_count2 = 3;
 uint8_t mode = 0;
 uint8_t segth = 0;
 
-uint8_t segments[10] = {
+uint8_t segments[11] = {
         0b0111111, // 0
         0b0000110, // 1
         0b1011011, // 2
@@ -28,7 +28,8 @@ uint8_t segments[10] = {
         0b1111101, // 6
         0b0000111, // 7
         0b1111111, // 8
-        0b1101111  // 9
+        0b1101111, // 9
+		0b1111001  // E
    };
 
 void display7SEG(uint8_t num){
@@ -67,6 +68,13 @@ void scan7SEG(uint8_t mode, uint8_t i){
 						HAL_GPIO_WritePin(GPIOA, SEG4_Pin, 0);
 						display7SEG(led_count2 % 10);
 						break;
+					default:
+						HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 0);
+						HAL_GPIO_WritePin(GPIOA, SEG2_Pin, 0);
+						HAL_GPIO_WritePin(GPIOA, SEG3_Pin, 0);
+						HAL_GPIO_WritePin(GPIOA, SEG4_Pin, 0);
+						display7SEG(10);
+						break;
 			}
 
 		}
@@ -83,12 +91,19 @@ void scan7SEG(uint8_t mode, uint8_t i){
 						HAL_GPIO_WritePin(GPIOA, SEG2_Pin, 0);
 						display7SEG(modify_val % 10);
 						break;
-					default:
+					case 2:
 						HAL_GPIO_WritePin(GPIOA, SEG2_Pin, 1);
 						HAL_GPIO_WritePin(GPIOA, SEG3_Pin, 0);
 						HAL_GPIO_WritePin(GPIOA, SEG4_Pin, 0);
 						display7SEG(status - 10);
 						display7SEG(status - 10);
+						break;
+					default:
+						HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 0);
+						HAL_GPIO_WritePin(GPIOA, SEG2_Pin, 0);
+						HAL_GPIO_WritePin(GPIOA, SEG3_Pin, 0);
+						HAL_GPIO_WritePin(GPIOA, SEG4_Pin, 0);
+						display7SEG(10);
 						break;
 			}
 		}

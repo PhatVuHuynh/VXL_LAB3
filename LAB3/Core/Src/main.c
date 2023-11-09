@@ -192,37 +192,20 @@ int main(void)
 
 setTimer(50, 0);
 setTimer(100, 1);
-setTimer(1, 2);
+setTimer(24, 2);
 status = INIT;
 //HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 1);
 //int c = 0;
   while (1){
-//	  if(timer_flag[2]) {
-//	  					scan7SEG(mode, segth++);					//Display modified value and number of MODE
-//	  					segth %= 4;
-//	  					setTimer(25, 2);
-//	  				}
-//
-//	  				if(timer_flag[0]){
-//	  					HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin | R2_RED_Pin);	//Red Leds blink every 0.5 sec
-//	  					setTimer(50, 0);
-//	  				}
-//
-//	  				if(is_Pressed(BUTTON1)){								//If BUTTON1 is pressed, change to MODIFY_YELLOW state
-//	  					status = MODIFY_YELLOW;
-//	  					write_led(R1_RED_Pin, R2_RED_Pin, 1);
-//	  					break;
-//	  				}
-//
-//	  				if(is_Pressed(BUTTON3)){								//If BUTTON3 is pressed, RED LEDs' duration = modify_val
-//	  					led_duration[RED_DURA] = modify_val;
-//	  				}
-//	  				if(is_Pressed(BUTTON2)){					//If BUTTON2 is pressed, increase modify_val by 1
-//	  						++modify_val;
-//	  						if(modify_val == 100) modify_val = 1;
-//	  					}
 
-	  //HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 1);
+//	  HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 0);
+//	  if(timer_flag[2]) {
+//		  HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin);
+//		scan7SEG(1, 11);		//Display letter 'E'
+//		setTimer(24, 2);
+//	}
+
+
 //	  HAL_GPIO_TogglePin(SEG1_GPIO_Port, SEG1_Pin);
 //	  HAL_GPIO_TogglePin(SEG1_GPIO_Port, R1_A_Pin);
 //
