@@ -12,8 +12,8 @@ uint16_t modify_val = 1;
 uint16_t status = INIT;
 uint8_t led_duration[3] = {INIT_RED_DURA, INIT_YELLOW_DURA, INIT_GREEN_DURA};
 
-uint8_t led_count1 = 5;
-uint8_t led_count2 = 3;
+uint8_t led_count1 = INIT_RED_DURA;
+uint8_t led_count2 = INIT_GREEN_DURA;
 
 uint8_t mode = 0;
 uint8_t segth = 0;

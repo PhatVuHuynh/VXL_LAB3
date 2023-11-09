@@ -190,9 +190,9 @@ int main(void)
 //  HAL_GPIO_WritePin(GPIOA, A5_Pin, 1);
   //HAL_GPIO_WritePin(GPIOB, BUTTON1_Pin, 1);
 
-setTimer(50, 0);
-setTimer(100, 1);
-setTimer(24, 2);
+setTimer(0.5, 0);
+setTimer(1, 1);
+setTimer(0.24, 2);
 status = INIT;
 //HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 1);
 //int c = 0;
@@ -201,9 +201,21 @@ status = INIT;
 //	  HAL_GPIO_WritePin(GPIOA, SEG1_Pin, 0);
 //	  if(timer_flag[2]) {
 //		  HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin);
-//		scan7SEG(1, 11);		//Display letter 'E'
-//		setTimer(24, 2);
+//		//scan7SEG(1, 11);		//Display letter 'E'
+//		  int t = (int) (1000 * 0.24) / 10;
+//		  display7SEG(t / 10);
+//		setTimer(0.24, 2);
 //	}
+//
+//	  if(timer_flag[1]) {
+//		  HAL_GPIO_TogglePin(GPIOB, R1_GREEN_Pin);
+//		  setTimer(1, 1);
+//	  }
+//
+//	  if(timer_flag[0]) {
+//	  		  HAL_GPIO_TogglePin(GPIOB, R1_YELLOW_Pin);
+//	  		  setTimer(0.5, 0);
+//	  	  }
 
 
 //	  HAL_GPIO_TogglePin(SEG1_GPIO_Port, SEG1_Pin);

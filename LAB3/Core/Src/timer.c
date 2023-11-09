@@ -8,11 +8,18 @@
 #include "timer.h"
 //# include "input_reading.h"
 
-int timer_counter[3] = {0, 0, 0};
+int timer_counter[3] = {0, 0, 0}; 	//timer_counter[0]: for every sec
+									//timer_counter[1]: for led duration
+									//timer_counter[2]: for scan 7SEG
 int timer_flag[3] = {0, 0, 0};
 
-void setTimer(int duration, int id){
-	timer_counter[id] = duration;
+//void setTimer(int duration, int id){
+//	timer_counter[id] = duration;
+//	timer_flag[id] = 0;
+//}
+
+void setTimer(float cycle, int id){
+	timer_counter[id] = (int) (1000 * cycle) / TIMER_DURATION;
 	timer_flag[id] = 0;
 }
 

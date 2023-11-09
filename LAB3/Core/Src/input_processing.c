@@ -17,9 +17,9 @@ void fsm_for_normal (){
 				write_led(SEG3_Pin, SEG4_Pin, 1);
 
 				status = RED_GREEN;
-				setTimer(100, 0);								//Timer for every second
-				setTimer(led_duration[GREEN_DURA] * 100, 1);	//Timer for led duration
-				setTimer(24, 2);								//Timer for scan 7SEG
+				setTimer(1, 0);								//Timer for every second
+				setTimer(led_duration[GREEN_DURA], 1);	//Timer for led duration
+				setTimer(0.24, 2);								//Timer for scan 7SEG
 				break;
 			case RED_GREEN:
 				if(timer_flag[1]){
@@ -32,7 +32,7 @@ void fsm_for_normal (){
 						led_count2 = led_duration[YELLOW_DURA];
 						status = RED_YELLOW;
 						write_led(R1_RED_Pin, R2_GREEN_Pin, 1);
-						setTimer(led_duration[YELLOW_DURA] * 100, 1);
+						setTimer(led_duration[YELLOW_DURA], 1);
 					//}
 
 				}
@@ -42,7 +42,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(24, 2);
+						setTimer(0.24, 2);
 					}
 				}
 
@@ -51,7 +51,7 @@ void fsm_for_normal (){
 					status = MODIFY_RED;						//and set timer for every 0.5 sec
 					write_led(R1_RED_Pin, R2_GREEN_Pin, 1);
 					mode = 1;
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 				break;
 			case RED_YELLOW:
@@ -66,7 +66,7 @@ void fsm_for_normal (){
 						led_count2 = led_duration[RED_DURA];
 						status = GREEN_RED;
 						write_led(R1_RED_Pin, R2_YELLOW_Pin, 1);
-						setTimer(led_duration[GREEN_DURA] * 100, 1);
+						setTimer(led_duration[GREEN_DURA], 1);
 					//}
 				}
 				else{
@@ -75,7 +75,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(24, 2);
+						setTimer(0.24, 2);
 					}
 				}
 
@@ -83,7 +83,7 @@ void fsm_for_normal (){
 					status = MODIFY_RED;
 					write_led(R1_RED_Pin, R2_YELLOW_Pin, 1);
 					mode = 1;
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 				break;
 			case GREEN_RED:
@@ -97,7 +97,7 @@ void fsm_for_normal (){
 						led_count1 = led_duration[YELLOW_DURA];
 						status = YELLOW_RED;
 						write_led(R1_GREEN_Pin, R2_RED_Pin, 1);
-						setTimer(led_duration[YELLOW_DURA] * 100, 1);
+						setTimer(led_duration[YELLOW_DURA], 1);
 					//}
 				}
 				else{
@@ -106,7 +106,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(24, 2);
+						setTimer(0.24, 2);
 					}
 				}
 
@@ -114,7 +114,7 @@ void fsm_for_normal (){
 					status = MODIFY_RED;
 					write_led(R1_GREEN_Pin, R2_RED_Pin, 1);
 					mode = 1;
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 				break;
 			case YELLOW_RED:
@@ -129,7 +129,7 @@ void fsm_for_normal (){
 						led_count2 = led_duration[GREEN_DURA];
 						status = RED_GREEN;
 						write_led(R1_YELLOW_Pin, R2_RED_Pin, 1);
-						setTimer(led_duration[GREEN_DURA] * 100, 1);
+						setTimer(led_duration[GREEN_DURA], 1);
 					//}
 				}
 				else{
@@ -138,7 +138,7 @@ void fsm_for_normal (){
 					if(timer_flag[2]) {
 						scan7SEG(mode, segth++);									//display 4 7SEG count
 						segth %= 4;
-						setTimer(24, 2);
+						setTimer(0.24, 2);
 					}
 				}
 
@@ -146,7 +146,7 @@ void fsm_for_normal (){
 					status = MODIFY_RED;
 					write_led(R1_YELLOW_Pin, R2_RED_Pin, 1);
 					mode = 1;
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 				break;
 		}
@@ -154,7 +154,7 @@ void fsm_for_normal (){
 		if(timer_flag[0] && mode == 0){						//Every second, decrease led count
 			if(led_count1 > 0) --led_count1;
 			if(led_count2 > 0) --led_count2;
-			setTimer(100, 0);
+			setTimer(1, 0);
 		}
 }
 
@@ -164,12 +164,12 @@ void fsm_for_modify(){
 				if(timer_flag[2]) {
 					scan7SEG(mode, segth++);					//Display modified value and number of MODE
 					segth %= 3;
-					setTimer(24, 2);
+					setTimer(0.24, 2);
 				}
 
 				if(timer_flag[0]){
 					HAL_GPIO_TogglePin(GPIOB, R1_RED_Pin | R2_RED_Pin);	//Red Leds blink every 0.5 sec
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 
 				if(is_Pressed(BUTTON1)){								//If BUTTON1 is pressed, change to MODIFY_YELLOW state
@@ -186,12 +186,12 @@ void fsm_for_modify(){
 				if(timer_flag[2]) {
 					scan7SEG(mode, segth++);					//Display modified value and number of MODE
 					segth %= 3;
-					setTimer(24, 2);
+					setTimer(0.24, 2);
 				}
 
 				if(timer_flag[0]){
 					HAL_GPIO_TogglePin(GPIOB, R1_YELLOW_Pin | R2_YELLOW_Pin);
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 
 				if(is_Pressed(BUTTON1)){
@@ -208,12 +208,12 @@ void fsm_for_modify(){
 				if(timer_flag[2]) {
 					scan7SEG(mode, segth++);					//Display modified value and number of MODE
 					segth %= 3;
-					setTimer(24, 2);
+					setTimer(0.24, 2);
 				}
 
 				if(timer_flag[0]){
 					HAL_GPIO_TogglePin(GPIOB, R1_GREEN_Pin | R2_GREEN_Pin);
-					setTimer(50, 0);
+					setTimer(0.5, 0);
 				}
 
 				if(is_Pressed(BUTTON1)){
@@ -234,8 +234,8 @@ void fsm_for_modify(){
 					led_count1 = led_duration[RED_DURA];
 					led_count2 = led_duration[GREEN_DURA];
 
-					setTimer(led_duration[GREEN_DURA] * 100, 1);
-					setTimer(100, 0);
+					setTimer(led_duration[GREEN_DURA], 1);
+					setTimer(1, 0);
 					break;
 				}
 
@@ -246,14 +246,14 @@ void fsm_for_modify(){
 			case ERR:							//ERR state
 				if(timer_flag[2]) {
 					scan7SEG(mode, 10);		//Display letter 'E'
-					setTimer(24, 2);
+					setTimer(0.24, 2);
 				}
 
 				if(timer_flag[0]) {
 					status = INIT;
 					mode = 0;
-					setTimer(led_duration[GREEN_DURA] * 100, 1);
-					setTimer(100, 0);
+					setTimer(led_duration[GREEN_DURA], 1);
+					setTimer(1, 0);
 				}
 				break;
 		}
