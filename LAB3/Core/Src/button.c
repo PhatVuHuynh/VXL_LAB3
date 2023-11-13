@@ -28,18 +28,6 @@ int is_Pressed(int id){
 	return 0;
 }
 
-//void write_led(uint16_t led_id, GPIO_PinState state){
-//	HAL_GPIO_WritePin(GPIOA, led_id, state);
-//
-//	if(led_id == A0_Pin) HAL_GPIO_WritePin(GPIOA, A7_Pin, 1);
-//	else HAL_GPIO_WritePin(GPIOA, led_id - 1, 1);
-//
-//	if(is_Pressed()){
-//		if(led_id == A7_Pin) HAL_GPIO_WritePin(GPIOA, A0_Pin, 1);
-//		else HAL_GPIO_WritePin(GPIOA, led_id + 1, 1);
-//	}
-//}
-
 void getKeyInput(int id, uint16_t BUTTON){
 	keyReg0[id] = keyReg1[id];
 	keyReg1[id] = keyReg2[id];

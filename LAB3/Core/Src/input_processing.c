@@ -27,9 +27,10 @@ void fsm_for_normal (){
 //						setTimer(led_count2 * 100, 1);			//else change to state RED_YELLOW
 //					}
 //					else{
+
+						led_count2 = led_duration[YELLOW_DURA];
 						++led_count1;
 						++led_count2;
-						led_count2 = led_duration[YELLOW_DURA];
 						status = RED_YELLOW;
 						write_led(R1_RED_Pin, R2_GREEN_Pin, 1);
 						setTimer(led_duration[YELLOW_DURA], 1);
@@ -60,10 +61,11 @@ void fsm_for_normal (){
 //						setTimer(led_count2 * 100, 1);
 //					}
 //					else{
-						++led_count1;
-						++led_count2;
+
 						led_count1 = led_duration[GREEN_DURA];
 						led_count2 = led_duration[RED_DURA];
+						++led_count1;
+						++led_count2;
 						status = GREEN_RED;
 						write_led(R1_RED_Pin, R2_YELLOW_Pin, 1);
 						setTimer(led_duration[GREEN_DURA], 1);
@@ -92,9 +94,10 @@ void fsm_for_normal (){
 //						setTimer(led_count1 * 100, 1);
 //					}
 //					else{
+
+						led_count1 = led_duration[YELLOW_DURA];
 						++led_count1;
 						++led_count2;
-						led_count1 = led_duration[YELLOW_DURA];
 						status = YELLOW_RED;
 						write_led(R1_GREEN_Pin, R2_RED_Pin, 1);
 						setTimer(led_duration[YELLOW_DURA], 1);
@@ -123,10 +126,11 @@ void fsm_for_normal (){
 //						setTimer(led_count1 * 100, 1);
 //					}
 //					else{
-						++led_count1;
-						++led_count2;
+
 						led_count1 = led_duration[RED_DURA];
 						led_count2 = led_duration[GREEN_DURA];
+						++led_count1;
+						++led_count2;
 						status = RED_GREEN;
 						write_led(R1_YELLOW_Pin, R2_RED_Pin, 1);
 						setTimer(led_duration[GREEN_DURA], 1);
@@ -229,10 +233,10 @@ void fsm_for_modify(){
 						mode = 1;
 					}
 
-					++led_count1;
-					++led_count2;
 					led_count1 = led_duration[RED_DURA];
 					led_count2 = led_duration[GREEN_DURA];
+//					++led_count1;
+//					++led_count2;
 
 					setTimer(led_duration[GREEN_DURA], 1);
 					setTimer(1, 0);
